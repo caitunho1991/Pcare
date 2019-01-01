@@ -16,3 +16,21 @@ F:\Work\Sang Nguyen\PCare\CMS_Lib\obj\Debug\CMS_Lib.csproj.CoreCompileInputs.cac
 F:\Work\Sang Nguyen\PCare\CMS_Lib\obj\Debug\CMS_Lib.csproj.CopyComplete
 F:\Work\Sang Nguyen\PCare\CMS_Lib\obj\Debug\CMS_Lib.dll
 F:\Work\Sang Nguyen\PCare\CMS_Lib\obj\Debug\CMS_Lib.pdb
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\CMS_Lib.dll.config
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\CMS_Lib.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\CMS_Lib.pdb
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\EntityFramework.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\EntityFramework.SqlServer.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\LibPhoneNumber.Contrib.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\Newtonsoft.Json.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\PhoneNumbers.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\Savage.PhoneNumber.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\EntityFramework.xml
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\EntityFramework.SqlServer.xml
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\Newtonsoft.Json.pdb
+C:\Data\Work\caitunho\Pcare\CMS_Lib\bin\Debug\Newtonsoft.Json.xml
+C:\Data\Work\caitunho\Pcare\CMS_Lib\obj\Debug\CMS_Lib.csprojResolveAssemblyReference.cache
+C:\Data\Work\caitunho\Pcare\CMS_Lib\obj\Debug\CMS_Lib.csproj.CoreCompileInputs.cache
+C:\Data\Work\caitunho\Pcare\CMS_Lib\obj\Debug\CMS_Lib.csproj.CopyComplete
+C:\Data\Work\caitunho\Pcare\CMS_Lib\obj\Debug\CMS_Lib.dll
+C:\Data\Work\caitunho\Pcare\CMS_Lib\obj\Debug\CMS_Lib.pdb

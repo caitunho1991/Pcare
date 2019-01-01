@@ -10,10 +10,10 @@ namespace API.Models
     {
         public string Title { get; set; }
         public string Link { get; set; }
-        public apiBlogsResponse GetLink(string link) {
+        public apiBlogsResponse GetLink(string link, int ID) {
             using (FL_DoctorEntities __context = new FL_DoctorEntities())
             {
-                return __context.Blogs.Where(x => x.Active == true).Select(y => new apiBlogsResponse
+                return __context.Blogs.Where(x => x.Active == true && x.ID == ID).Select(y => new apiBlogsResponse
                 {
                     Title = y.Title,
                     Link = link

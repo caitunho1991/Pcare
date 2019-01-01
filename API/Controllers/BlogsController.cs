@@ -31,7 +31,7 @@ namespace API.Controllers
                 {
                     link = CMS_Helper.Settings("base_url") + "/Web/Home/About";
                 }
-                return Content(HttpStatusCode.OK, response.Ok(res.GetLink(link), "Lấy link bài viết thành công."));
+                return Content(HttpStatusCode.OK, response.Ok(res.GetLink(link, 1), "Lấy link bài viết thành công."));
             }
             catch (Exception e)
             {
@@ -49,7 +49,7 @@ namespace API.Controllers
             try
             {
                 var link = CMS_Helper.Settings("base_url") + "/Web/Home/Terms";
-                return Content(HttpStatusCode.OK, response.Ok(res.GetLink(link), "Lấy link bài viết thành công."));
+                return Content(HttpStatusCode.OK, response.Ok(res.GetLink(link, 2), "Lấy link bài viết thành công."));
             }
             catch (Exception e)
             {
@@ -67,7 +67,7 @@ namespace API.Controllers
             try
             {
                 var link = CMS_Helper.Settings("base_url") + "/Web/Home/Support";
-                return Content(HttpStatusCode.OK, response.Ok(res.GetLink(link), "Lấy link bài viết thành công."));
+                return Content(HttpStatusCode.OK, response.Ok(res.GetLink(link, 3), "Lấy link bài viết thành công."));
             }
             catch (Exception e)
             {
