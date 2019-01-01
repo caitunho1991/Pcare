@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{97A169F1-44F0-455E-8868-D590807C5F01}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CMS_Lib</RootNamespace>
+    <AssemblyName>CMS_Lib</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="LibPhoneNumber.Contrib, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibPhoneNumber.Contrib.1.2.0\lib\net45\LibPhoneNumber.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PhoneNumbers, Version=7.7.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\libphonenumber-csharp.7.7.4\lib\PhoneNumbers.dll</HintPath>
+    </Reference>
+    <Reference Include="Savage.PhoneNumber, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PhoneNumber.1.1.1\lib\net46\Savage.PhoneNumber.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CMS_Helper.cs" />
+    <Compile Include="Data\Account.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\API_Logs.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Blog.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Category.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Group.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\GroupUser.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Language.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Major.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PCare.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCare.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PCare.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\PCare.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PCare.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Resource.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Role.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Setting.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SettingGroup.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\SettingType.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\sysdiagram.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Transaction.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransactionDetail.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransactionStatu.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransactionTransactionStatu.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransactionType.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\User.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Data\PCare.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PCare.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="Data\PCare.edmx.diagram">
+      <DependentUpon>PCare.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Data\PCare.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>PCare.Context.cs</LastGenOutput>
+      <DependentUpon>PCare.edmx</DependentUpon>
+    </Content>
+    <Content Include="Data\PCare.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PCare.edmx</DependentUpon>
+      <LastGenOutput>PCare.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

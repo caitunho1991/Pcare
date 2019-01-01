@@ -1,0 +1,1403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FL_DoctorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account_Role">
+          <Key>
+            <PropertyRef Name="AccountID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="AccountID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Accounts">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GUID" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+          <Property Name="IdCardNumber" Type="varchar" MaxLength="100" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="TokenRegister" Type="varchar" MaxLength="100" />
+          <Property Name="ExpireTokenRegister" Type="datetime" />
+          <Property Name="TokenLogin" Type="varchar" MaxLength="100" />
+          <Property Name="ExpireTokenLogin" Type="datetime" />
+          <Property Name="TokenForgotPassword" Type="varchar" MaxLength="100" />
+          <Property Name="ExpireTokenForgotPassword" Type="datetime" />
+          <Property Name="IsAppove" Type="bit" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="IsVerifyEmail" Type="bit" />
+          <Property Name="IsVerifyPhone" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsBanned" Type="bit" />
+          <Property Name="DateBanned" Type="datetime" />
+        </EntityType>
+        <EntityType Name="API_Logs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="API_Request" Type="varchar" MaxLength="100" />
+          <Property Name="User_Request" Type="varchar" MaxLength="100" />
+          <Property Name="Content_Request" Type="text" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Blogs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="100" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Content" Type="ntext" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+          <Property Name="Tags" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="DatePost" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Group_Role">
+          <Key>
+            <PropertyRef Name="GroupID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="GroupID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Groups">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="GroupUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Languages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Icon" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="IsDefault" Type="bit" />
+        </EntityType>
+        <EntityType Name="Major">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="ShortDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Content" Type="text" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Value" Type="nvarchar" MaxLength="100" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SettingGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="SettingTypeID" Type="int" />
+          <Property Name="SettingGroupID" Type="int" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SettingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionCode" Type="varchar" MaxLength="100" />
+          <Property Name="TransactionTypeID" Type="int" />
+          <Property Name="SenderID" Type="int" />
+          <Property Name="EndingBalanceSender" Type="varchar(max)" />
+          <Property Name="ReceiverID" Type="int" />
+          <Property Name="EndingBalanceReceiver" Type="varchar(max)" />
+          <Property Name="TotalAmount" Type="varchar(max)" />
+          <Property Name="TotalDiscount" Type="varchar(max)" />
+          <Property Name="TotalPaid" Type="varchar(max)" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TransactionDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionID" Type="int" />
+          <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="varchar(max)" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Total" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="TransactionStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TransactionTransactionStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionID" Type="int" />
+          <Property Name="TransactionStatusID" Type="int" />
+          <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GUID" Type="varchar" MaxLength="100" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="100" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" />
+          <Property Name="Username" Type="varchar" MaxLength="100" />
+          <Property Name="Password" Type="varchar" MaxLength="100" />
+          <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+          <Property Name="IdCardNumber" Type="varchar" MaxLength="100" />
+          <Property Name="GroupID" Type="int" />
+          <Property Name="TokenRegister" Type="varchar" MaxLength="100" />
+          <Property Name="ExpireTokenRegister" Type="datetime" />
+          <Property Name="TokenLogin" Type="varchar" MaxLength="100" />
+          <Property Name="ExpireTokenLogin" Type="datetime" />
+          <Property Name="TokenForgotPassword" Type="varchar" MaxLength="100" />
+          <Property Name="ExpireTokenForgotPassword" Type="datetime" />
+          <Property Name="TokenDevice" Type="text" />
+          <Property Name="TokenAutoLogin" Type="text" />
+          <Property Name="IsApprove" Type="bit" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="IsVerifyEmail" Type="bit" />
+          <Property Name="IsVerifyPhone" Type="bit" />
+          <Property Name="Balance" Type="varchar" MaxLength="100" />
+          <Property Name="Lat" Type="varchar" MaxLength="100" />
+          <Property Name="Lng" Type="varchar" MaxLength="100" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsBanned" Type="bit" />
+          <Property Name="DateBanned" Type="datetime" />
+          <Property Name="ThumbLicense" Type="varchar" MaxLength="255" />
+          <Property Name="ThumbAvatar" Type="varchar" MaxLength="255" />
+          <Property Name="ThumbIdCard" Type="varchar" MaxLength="255" />
+          <Property Name="MajorID" Type="int" />
+          <Property Name="Sex" Type="int" />
+          <Property Name="TokenFacebook" Type="text" />
+        </EntityType>
+        <Association Name="FK_Account_Group">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Accounts">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountRole_Account">
+          <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+          <End Role="Account_Role" Type="Self.Account_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accounts">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Role">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AccountRole_Role">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Account_Role" Type="Self.Account_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account_Role">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLogs_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Blogs">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupRole_Group">
+          <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+          <End Role="Group_Role" Type="Self.Group_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Groups">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Group_Role">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GroupRole_Role">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Group_Role" Type="Self.Group_Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Group_Role">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_SettingGroup">
+          <End Role="SettingGroup" Type="Self.SettingGroup" Multiplicity="0..1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SettingGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="SettingGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_SettingType">
+          <End Role="SettingType" Type="Self.SettingType" Multiplicity="0..1" />
+          <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SettingType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Settings">
+              <PropertyRef Name="SettingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_TransactionType">
+          <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="TransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetail_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionDetails">
+              <PropertyRef Name="TransactionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionTransactionStatus_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="TransactionTransactionStatus" Type="Self.TransactionTransactionStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionTransactionStatus">
+              <PropertyRef Name="TransactionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionTransactionStatus_TransactionStatus">
+          <End Role="TransactionStatus" Type="Self.TransactionStatus" Multiplicity="0..1" />
+          <End Role="TransactionTransactionStatus" Type="Self.TransactionTransactionStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionTransactionStatus">
+              <PropertyRef Name="TransactionStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_GroupUser">
+          <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Major">
+          <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Major">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="MajorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FL_DoctorModelStoreContainer">
+          <EntitySet Name="Account_Role" EntityType="Self.Account_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="API_Logs" EntityType="Self.API_Logs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Group_Role" EntityType="Self.Group_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SettingGroup" EntityType="Self.SettingGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SettingType" EntityType="Self.SettingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionTransactionStatus" EntityType="Self.TransactionTransactionStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Account_Group" Association="Self.FK_Account_Group">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountRole_Account" Association="Self.FK_AccountRole_Account">
+            <End Role="Accounts" EntitySet="Accounts" />
+            <End Role="Account_Role" EntitySet="Account_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AccountRole_Role" Association="Self.FK_AccountRole_Role">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Account_Role" EntitySet="Account_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLogs_Category" Association="Self.FK_BLogs_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Blogs" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupRole_Group" Association="Self.FK_GroupRole_Group">
+            <End Role="Groups" EntitySet="Groups" />
+            <End Role="Group_Role" EntitySet="Group_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GroupRole_Role" Association="Self.FK_GroupRole_Role">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Group_Role" EntitySet="Group_Role" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_SettingGroup" Association="Self.FK_Settings_SettingGroup">
+            <End Role="SettingGroup" EntitySet="SettingGroup" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_SettingType" Association="Self.FK_Settings_SettingType">
+            <End Role="SettingType" EntitySet="SettingType" />
+            <End Role="Settings" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_TransactionType" Association="Self.FK_Transaction_TransactionType">
+            <End Role="TransactionType" EntitySet="TransactionType" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetail_Transaction" Association="Self.FK_TransactionDetail_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionTransactionStatus_Transaction" Association="Self.FK_TransactionTransactionStatus_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="TransactionTransactionStatus" EntitySet="TransactionTransactionStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionTransactionStatus_TransactionStatus" Association="Self.FK_TransactionTransactionStatus_TransactionStatus">
+            <End Role="TransactionStatus" EntitySet="TransactionStatus" />
+            <End Role="TransactionTransactionStatus" EntitySet="TransactionTransactionStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_GroupUser" Association="Self.FK_User_GroupUser">
+            <End Role="GroupUser" EntitySet="GroupUser" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Major" Association="Self.FK_User_Major">
+            <End Role="Major" EntitySet="Major" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FL_DoctorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="FL_DoctorEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="FL_DoctorModel.Account" />
+          <EntitySet Name="API_Logs" EntityType="FL_DoctorModel.API_Logs" />
+          <EntitySet Name="Blogs" EntityType="FL_DoctorModel.Blog" />
+          <EntitySet Name="Categories" EntityType="FL_DoctorModel.Category" />
+          <EntitySet Name="Groups" EntityType="FL_DoctorModel.Group" />
+          <EntitySet Name="GroupUsers" EntityType="FL_DoctorModel.GroupUser" />
+          <EntitySet Name="Languages" EntityType="FL_DoctorModel.Language" />
+          <EntitySet Name="Majors" EntityType="FL_DoctorModel.Major" />
+          <EntitySet Name="Resources" EntityType="FL_DoctorModel.Resource" />
+          <EntitySet Name="Roles" EntityType="FL_DoctorModel.Role" />
+          <EntitySet Name="SettingGroups" EntityType="FL_DoctorModel.SettingGroup" />
+          <EntitySet Name="Settings" EntityType="FL_DoctorModel.Setting" />
+          <EntitySet Name="SettingTypes" EntityType="FL_DoctorModel.SettingType" />
+          <EntitySet Name="sysdiagrams" EntityType="FL_DoctorModel.sysdiagram" />
+          <EntitySet Name="Transactions" EntityType="FL_DoctorModel.Transaction" />
+          <EntitySet Name="TransactionDetails" EntityType="FL_DoctorModel.TransactionDetail" />
+          <EntitySet Name="TransactionStatus" EntityType="FL_DoctorModel.TransactionStatu" />
+          <EntitySet Name="TransactionTransactionStatus" EntityType="FL_DoctorModel.TransactionTransactionStatu" />
+          <EntitySet Name="TransactionTypes" EntityType="FL_DoctorModel.TransactionType" />
+          <EntitySet Name="Users" EntityType="FL_DoctorModel.User" />
+          <AssociationSet Name="FK_Account_Group" Association="FL_DoctorModel.FK_Account_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Account" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BLogs_Category" Association="FL_DoctorModel.FK_BLogs_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Blog" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_GroupUser" Association="FL_DoctorModel.FK_User_GroupUser">
+            <End Role="GroupUser" EntitySet="GroupUsers" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Major" Association="FL_DoctorModel.FK_User_Major">
+            <End Role="Major" EntitySet="Majors" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_SettingGroup" Association="FL_DoctorModel.FK_Settings_SettingGroup">
+            <End Role="SettingGroup" EntitySet="SettingGroups" />
+            <End Role="Setting" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Settings_SettingType" Association="FL_DoctorModel.FK_Settings_SettingType">
+            <End Role="SettingType" EntitySet="SettingTypes" />
+            <End Role="Setting" EntitySet="Settings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_TransactionType" Association="FL_DoctorModel.FK_Transaction_TransactionType">
+            <End Role="TransactionType" EntitySet="TransactionTypes" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionDetail_Transaction" Association="FL_DoctorModel.FK_TransactionDetail_Transaction">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="TransactionDetail" EntitySet="TransactionDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionTransactionStatus_Transaction" Association="FL_DoctorModel.FK_TransactionTransactionStatus_Transaction">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="TransactionTransactionStatu" EntitySet="TransactionTransactionStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionTransactionStatus_TransactionStatus" Association="FL_DoctorModel.FK_TransactionTransactionStatus_TransactionStatus">
+            <End Role="TransactionStatu" EntitySet="TransactionStatus" />
+            <End Role="TransactionTransactionStatu" EntitySet="TransactionTransactionStatus" />
+          </AssociationSet>
+          <AssociationSet Name="Account_Role" Association="FL_DoctorModel.Account_Role">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="Group_Role" Association="FL_DoctorModel.Group_Role">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdCardNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="TokenRegister" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireTokenRegister" Type="DateTime" Precision="3" />
+          <Property Name="TokenLogin" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireTokenLogin" Type="DateTime" Precision="3" />
+          <Property Name="TokenForgotPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireTokenForgotPassword" Type="DateTime" Precision="3" />
+          <Property Name="IsAppove" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="IsVerifyEmail" Type="Boolean" />
+          <Property Name="IsVerifyPhone" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsBanned" Type="Boolean" />
+          <Property Name="DateBanned" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Group" Relationship="FL_DoctorModel.FK_Account_Group" FromRole="Account" ToRole="Group" />
+          <NavigationProperty Name="Roles" Relationship="FL_DoctorModel.Account_Role" FromRole="Account" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="API_Logs">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="API_Request" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="User_Request" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Content_Request" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Thumbnail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Tags" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="DatePost" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Category" Relationship="FL_DoctorModel.FK_BLogs_Category" FromRole="Blog" ToRole="Category" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Blogs" Relationship="FL_DoctorModel.FK_BLogs_Category" FromRole="Category" ToRole="Blog" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accounts" Relationship="FL_DoctorModel.FK_Account_Group" FromRole="Group" ToRole="Account" />
+          <NavigationProperty Name="Roles" Relationship="FL_DoctorModel.Group_Role" FromRole="Group" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="GroupUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Users" Relationship="FL_DoctorModel.FK_User_GroupUser" FromRole="GroupUser" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="IsDefault" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Major">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ShortDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="FL_DoctorModel.FK_User_Major" FromRole="Major" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Resource">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Accounts" Relationship="FL_DoctorModel.Account_Role" FromRole="Role" ToRole="Account" />
+          <NavigationProperty Name="Groups" Relationship="FL_DoctorModel.Group_Role" FromRole="Role" ToRole="Group" />
+        </EntityType>
+        <EntityType Name="SettingGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Settings" Relationship="FL_DoctorModel.FK_Settings_SettingGroup" FromRole="SettingGroup" ToRole="Setting" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="SettingTypeID" Type="Int32" />
+          <Property Name="SettingGroupID" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="SettingGroup" Relationship="FL_DoctorModel.FK_Settings_SettingGroup" FromRole="Setting" ToRole="SettingGroup" />
+          <NavigationProperty Name="SettingType" Relationship="FL_DoctorModel.FK_Settings_SettingType" FromRole="Setting" ToRole="SettingType" />
+        </EntityType>
+        <EntityType Name="SettingType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Settings" Relationship="FL_DoctorModel.FK_Settings_SettingType" FromRole="SettingType" ToRole="Setting" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TransactionTypeID" Type="Int32" />
+          <Property Name="SenderID" Type="Int32" />
+          <Property Name="EndingBalanceSender" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReceiverID" Type="Int32" />
+          <Property Name="EndingBalanceReceiver" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TotalAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TotalDiscount" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TotalPaid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="TransactionType" Relationship="FL_DoctorModel.FK_Transaction_TransactionType" FromRole="Transaction" ToRole="TransactionType" />
+          <NavigationProperty Name="TransactionDetails" Relationship="FL_DoctorModel.FK_TransactionDetail_Transaction" FromRole="Transaction" ToRole="TransactionDetail" />
+          <NavigationProperty Name="TransactionTransactionStatus" Relationship="FL_DoctorModel.FK_TransactionTransactionStatus_Transaction" FromRole="Transaction" ToRole="TransactionTransactionStatu" />
+        </EntityType>
+        <EntityType Name="TransactionDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionID" Type="Int32" />
+          <Property Name="ProductName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Total" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transaction" Relationship="FL_DoctorModel.FK_TransactionDetail_Transaction" FromRole="TransactionDetail" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="TransactionStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TransactionTransactionStatus" Relationship="FL_DoctorModel.FK_TransactionTransactionStatus_TransactionStatus" FromRole="TransactionStatu" ToRole="TransactionTransactionStatu" />
+        </EntityType>
+        <EntityType Name="TransactionTransactionStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionID" Type="Int32" />
+          <Property Name="TransactionStatusID" Type="Int32" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Transaction" Relationship="FL_DoctorModel.FK_TransactionTransactionStatus_Transaction" FromRole="TransactionTransactionStatu" ToRole="Transaction" />
+          <NavigationProperty Name="TransactionStatu" Relationship="FL_DoctorModel.FK_TransactionTransactionStatus_TransactionStatus" FromRole="TransactionTransactionStatu" ToRole="TransactionStatu" />
+        </EntityType>
+        <EntityType Name="TransactionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Transactions" Relationship="FL_DoctorModel.FK_Transaction_TransactionType" FromRole="TransactionType" ToRole="Transaction" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GUID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Thumbnail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdCardNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GroupID" Type="Int32" />
+          <Property Name="TokenRegister" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireTokenRegister" Type="DateTime" Precision="3" />
+          <Property Name="TokenLogin" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireTokenLogin" Type="DateTime" Precision="3" />
+          <Property Name="TokenForgotPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ExpireTokenForgotPassword" Type="DateTime" Precision="3" />
+          <Property Name="TokenDevice" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="TokenAutoLogin" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsApprove" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="IsVerifyEmail" Type="Boolean" />
+          <Property Name="IsVerifyPhone" Type="Boolean" />
+          <Property Name="Balance" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Lat" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Lng" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsBanned" Type="Boolean" />
+          <Property Name="DateBanned" Type="DateTime" Precision="3" />
+          <Property Name="ThumbLicense" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ThumbAvatar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ThumbIdCard" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="MajorID" Type="Int32" />
+          <Property Name="Sex" Type="Int32" />
+          <Property Name="TokenFacebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="GroupUser" Relationship="FL_DoctorModel.FK_User_GroupUser" FromRole="User" ToRole="GroupUser" />
+          <NavigationProperty Name="Major" Relationship="FL_DoctorModel.FK_User_Major" FromRole="User" ToRole="Major" />
+        </EntityType>
+        <Association Name="FK_Account_Group">
+          <End Type="FL_DoctorModel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Account" Role="Account" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Account">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BLogs_Category">
+          <End Type="FL_DoctorModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Blog" Role="Blog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Blog">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_GroupUser">
+          <End Type="FL_DoctorModel.GroupUser" Role="GroupUser" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GroupUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Major">
+          <End Type="FL_DoctorModel.Major" Role="Major" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Major">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="MajorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_SettingGroup">
+          <End Type="FL_DoctorModel.SettingGroup" Role="SettingGroup" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Setting" Role="Setting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SettingGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="SettingGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Settings_SettingType">
+          <End Type="FL_DoctorModel.SettingType" Role="SettingType" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Setting" Role="Setting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SettingType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Setting">
+              <PropertyRef Name="SettingTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_TransactionType">
+          <End Type="FL_DoctorModel.TransactionType" Role="TransactionType" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="TransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionDetail_Transaction">
+          <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.TransactionDetail" Role="TransactionDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionDetail">
+              <PropertyRef Name="TransactionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionTransactionStatus_Transaction">
+          <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.TransactionTransactionStatu" Role="TransactionTransactionStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionTransactionStatu">
+              <PropertyRef Name="TransactionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionTransactionStatus_TransactionStatus">
+          <End Type="FL_DoctorModel.TransactionStatu" Role="TransactionStatu" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.TransactionTransactionStatu" Role="TransactionTransactionStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TransactionStatu">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionTransactionStatu">
+              <PropertyRef Name="TransactionStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Account_Role">
+          <End Type="FL_DoctorModel.Account" Role="Account" Multiplicity="*" />
+          <End Type="FL_DoctorModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        <Association Name="Group_Role">
+          <End Type="FL_DoctorModel.Group" Role="Group" Multiplicity="*" />
+          <End Type="FL_DoctorModel.Role" Role="Role" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FL_DoctorModelStoreContainer" CdmEntityContainer="FL_DoctorEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Account">
+              <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="DateBanned" ColumnName="DateBanned" />
+                <ScalarProperty Name="IsBanned" ColumnName="IsBanned" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsVerifyPhone" ColumnName="IsVerifyPhone" />
+                <ScalarProperty Name="IsVerifyEmail" ColumnName="IsVerifyEmail" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IsAppove" ColumnName="IsAppove" />
+                <ScalarProperty Name="ExpireTokenForgotPassword" ColumnName="ExpireTokenForgotPassword" />
+                <ScalarProperty Name="TokenForgotPassword" ColumnName="TokenForgotPassword" />
+                <ScalarProperty Name="ExpireTokenLogin" ColumnName="ExpireTokenLogin" />
+                <ScalarProperty Name="TokenLogin" ColumnName="TokenLogin" />
+                <ScalarProperty Name="ExpireTokenRegister" ColumnName="ExpireTokenRegister" />
+                <ScalarProperty Name="TokenRegister" ColumnName="TokenRegister" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="IdCardNumber" ColumnName="IdCardNumber" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="API_Logs">
+            <EntityTypeMapping TypeName="FL_DoctorModel.API_Logs">
+              <MappingFragment StoreEntitySet="API_Logs">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Content_Request" ColumnName="Content_Request" />
+                <ScalarProperty Name="User_Request" ColumnName="User_Request" />
+                <ScalarProperty Name="API_Request" ColumnName="API_Request" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Blogs">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Blog">
+              <MappingFragment StoreEntitySet="Blogs">
+                <ScalarProperty Name="DatePost" ColumnName="DatePost" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Tags" ColumnName="Tags" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Group">
+              <MappingFragment StoreEntitySet="Groups">
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GroupUsers">
+            <EntityTypeMapping TypeName="FL_DoctorModel.GroupUser">
+              <MappingFragment StoreEntitySet="GroupUser">
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Language">
+              <MappingFragment StoreEntitySet="Languages">
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Majors">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Major">
+              <MappingFragment StoreEntitySet="Major">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resources">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Resource">
+              <MappingFragment StoreEntitySet="Resource">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SettingGroups">
+            <EntityTypeMapping TypeName="FL_DoctorModel.SettingGroup">
+              <MappingFragment StoreEntitySet="SettingGroup">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SettingGroupID" ColumnName="SettingGroupID" />
+                <ScalarProperty Name="SettingTypeID" ColumnName="SettingTypeID" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SettingTypes">
+            <EntityTypeMapping TypeName="FL_DoctorModel.SettingType">
+              <MappingFragment StoreEntitySet="SettingType">
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FL_DoctorModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Transaction">
+              <MappingFragment StoreEntitySet="Transaction">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+                <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="EndingBalanceReceiver" ColumnName="EndingBalanceReceiver" />
+                <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+                <ScalarProperty Name="EndingBalanceSender" ColumnName="EndingBalanceSender" />
+                <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+                <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+                <ScalarProperty Name="TransactionCode" ColumnName="TransactionCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDetails">
+            <EntityTypeMapping TypeName="FL_DoctorModel.TransactionDetail">
+              <MappingFragment StoreEntitySet="TransactionDetails">
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionStatus">
+            <EntityTypeMapping TypeName="FL_DoctorModel.TransactionStatu">
+              <MappingFragment StoreEntitySet="TransactionStatus">
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTransactionStatus">
+            <EntityTypeMapping TypeName="FL_DoctorModel.TransactionTransactionStatu">
+              <MappingFragment StoreEntitySet="TransactionTransactionStatus">
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="TransactionStatusID" ColumnName="TransactionStatusID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionTypes">
+            <EntityTypeMapping TypeName="FL_DoctorModel.TransactionType">
+              <MappingFragment StoreEntitySet="TransactionType">
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FL_DoctorModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="TokenFacebook" ColumnName="TokenFacebook" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="MajorID" ColumnName="MajorID" />
+                <ScalarProperty Name="ThumbIdCard" ColumnName="ThumbIdCard" />
+                <ScalarProperty Name="ThumbAvatar" ColumnName="ThumbAvatar" />
+                <ScalarProperty Name="ThumbLicense" ColumnName="ThumbLicense" />
+                <ScalarProperty Name="DateBanned" ColumnName="DateBanned" />
+                <ScalarProperty Name="IsBanned" ColumnName="IsBanned" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="IsVerifyPhone" ColumnName="IsVerifyPhone" />
+                <ScalarProperty Name="IsVerifyEmail" ColumnName="IsVerifyEmail" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+                <ScalarProperty Name="TokenAutoLogin" ColumnName="TokenAutoLogin" />
+                <ScalarProperty Name="TokenDevice" ColumnName="TokenDevice" />
+                <ScalarProperty Name="ExpireTokenForgotPassword" ColumnName="ExpireTokenForgotPassword" />
+                <ScalarProperty Name="TokenForgotPassword" ColumnName="TokenForgotPassword" />
+                <ScalarProperty Name="ExpireTokenLogin" ColumnName="ExpireTokenLogin" />
+                <ScalarProperty Name="TokenLogin" ColumnName="TokenLogin" />
+                <ScalarProperty Name="ExpireTokenRegister" ColumnName="ExpireTokenRegister" />
+                <ScalarProperty Name="TokenRegister" ColumnName="TokenRegister" />
+                <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+                <ScalarProperty Name="IdCardNumber" ColumnName="IdCardNumber" />
+                <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="GUID" ColumnName="GUID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Account_Role" TypeName="FL_DoctorModel.Account_Role" StoreEntitySet="Account_Role">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="ID" ColumnName="RoleID" />
+            </EndProperty>
+            <EndProperty Name="Account">
+              <ScalarProperty Name="ID" ColumnName="AccountID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Group_Role" TypeName="FL_DoctorModel.Group_Role" StoreEntitySet="Group_Role">
+            <EndProperty Name="Role">
+              <ScalarProperty Name="ID" ColumnName="RoleID" />
+            </EndProperty>
+            <EndProperty Name="Group">
+              <ScalarProperty Name="ID" ColumnName="GroupID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

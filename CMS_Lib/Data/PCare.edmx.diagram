@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d874bef08fb04500a829fc9b73dee320" Name="Diagram1">
+        <EntityTypeShape EntityType="FL_DoctorModel.Account" Width="1.5" PointX="8" PointY="11.5" />
+        <EntityTypeShape EntityType="FL_DoctorModel.API_Logs" Width="1.5" PointX="12.75" PointY="6.125" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Blog" Width="1.5" PointX="15" PointY="1.375" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Category" Width="1.5" PointX="12.75" PointY="1.75" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Group" Width="1.5" PointX="5.75" PointY="13.5" />
+        <EntityTypeShape EntityType="FL_DoctorModel.GroupUser" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Language" Width="1.5" PointX="12.75" PointY="9.125" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Major" Width="1.5" PointX="7.75" PointY="4.5" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Resource" Width="1.5" PointX="12.75" PointY="12.125" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Role" Width="1.5" PointX="10.25" PointY="13.5" />
+        <EntityTypeShape EntityType="FL_DoctorModel.SettingGroup" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Setting" Width="1.5" PointX="3" PointY="10.25" />
+        <EntityTypeShape EntityType="FL_DoctorModel.SettingType" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="FL_DoctorModel.sysdiagram" Width="1.5" PointX="0.75" PointY="14.125" />
+        <EntityTypeShape EntityType="FL_DoctorModel.Transaction" Width="1.5" PointX="3" PointY="2.25" />
+        <EntityTypeShape EntityType="FL_DoctorModel.TransactionDetail" Width="1.5" PointX="5.25" PointY="5.75" />
+        <EntityTypeShape EntityType="FL_DoctorModel.TransactionStatu" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="FL_DoctorModel.TransactionTransactionStatu" Width="1.5" PointX="5.25" PointY="2" />
+        <EntityTypeShape EntityType="FL_DoctorModel.TransactionType" Width="1.5" PointX="0.75" PointY="2.875" />
+        <EntityTypeShape EntityType="FL_DoctorModel.User" Width="1.5" PointX="10" PointY="1.625" />
+        <AssociationConnector Association="FL_DoctorModel.FK_Account_Group" />
+        <AssociationConnector Association="FL_DoctorModel.FK_BLogs_Category" />
+        <AssociationConnector Association="FL_DoctorModel.FK_User_GroupUser" />
+        <AssociationConnector Association="FL_DoctorModel.FK_User_Major" />
+        <AssociationConnector Association="FL_DoctorModel.FK_Settings_SettingGroup" />
+        <AssociationConnector Association="FL_DoctorModel.FK_Settings_SettingType" />
+        <AssociationConnector Association="FL_DoctorModel.FK_Transaction_TransactionType" />
+        <AssociationConnector Association="FL_DoctorModel.FK_TransactionDetail_Transaction" />
+        <AssociationConnector Association="FL_DoctorModel.FK_TransactionTransactionStatus_Transaction" />
+        <AssociationConnector Association="FL_DoctorModel.FK_TransactionTransactionStatus_TransactionStatus" />
+        <AssociationConnector Association="FL_DoctorModel.Account_Role" />
+        <AssociationConnector Association="FL_DoctorModel.Group_Role" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

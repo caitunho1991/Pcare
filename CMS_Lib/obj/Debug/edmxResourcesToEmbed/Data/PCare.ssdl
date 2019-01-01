@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FL_DoctorModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Account_Role">
+    <Key>
+      <PropertyRef Name="AccountID" />
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="AccountID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GUID" Type="varchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+    <Property Name="IdCardNumber" Type="varchar" MaxLength="100" />
+    <Property Name="GroupID" Type="int" />
+    <Property Name="TokenRegister" Type="varchar" MaxLength="100" />
+    <Property Name="ExpireTokenRegister" Type="datetime" />
+    <Property Name="TokenLogin" Type="varchar" MaxLength="100" />
+    <Property Name="ExpireTokenLogin" Type="datetime" />
+    <Property Name="TokenForgotPassword" Type="varchar" MaxLength="100" />
+    <Property Name="ExpireTokenForgotPassword" Type="datetime" />
+    <Property Name="IsAppove" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="IsVerifyEmail" Type="bit" />
+    <Property Name="IsVerifyPhone" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="IsBanned" Type="bit" />
+    <Property Name="DateBanned" Type="datetime" />
+  </EntityType>
+  <EntityType Name="API_Logs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="API_Request" Type="varchar" MaxLength="100" />
+    <Property Name="User_Request" Type="varchar" MaxLength="100" />
+    <Property Name="Content_Request" Type="text" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Blogs">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Alias" Type="varchar" MaxLength="100" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Content" Type="ntext" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+    <Property Name="Tags" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="DatePost" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Group_Role">
+    <Key>
+      <PropertyRef Name="GroupID" />
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="GroupID" Type="int" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Groups">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="GroupUser">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Languages">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Icon" Type="varchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="IsDefault" Type="bit" />
+  </EntityType>
+  <EntityType Name="Major">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="ShortDescription" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar" MaxLength="100" />
+    <Property Name="Content" Type="text" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Resource">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Value" Type="nvarchar" MaxLength="100" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SettingGroup">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Settings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Value" Type="nvarchar(max)" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="SettingTypeID" Type="int" />
+    <Property Name="SettingGroupID" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="SettingType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Transaction">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionCode" Type="varchar" MaxLength="100" />
+    <Property Name="TransactionTypeID" Type="int" />
+    <Property Name="SenderID" Type="int" />
+    <Property Name="EndingBalanceSender" Type="varchar(max)" />
+    <Property Name="ReceiverID" Type="int" />
+    <Property Name="EndingBalanceReceiver" Type="varchar(max)" />
+    <Property Name="TotalAmount" Type="varchar(max)" />
+    <Property Name="TotalDiscount" Type="varchar(max)" />
+    <Property Name="TotalPaid" Type="varchar(max)" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TransactionDetails">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionID" Type="int" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Price" Type="varchar(max)" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Total" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="TransactionStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="TransactionTransactionStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TransactionID" Type="int" />
+    <Property Name="TransactionStatusID" Type="int" />
+    <Property Name="DateCreated" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TransactionType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="varchar" MaxLength="100" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GUID" Type="varchar" MaxLength="100" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="DateOfBirth" Type="datetime" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="Thumbnail" Type="varchar" MaxLength="100" />
+    <Property Name="IdCardNumber" Type="varchar" MaxLength="100" />
+    <Property Name="GroupID" Type="int" />
+    <Property Name="TokenRegister" Type="varchar" MaxLength="100" />
+    <Property Name="ExpireTokenRegister" Type="datetime" />
+    <Property Name="TokenLogin" Type="varchar" MaxLength="100" />
+    <Property Name="ExpireTokenLogin" Type="datetime" />
+    <Property Name="TokenForgotPassword" Type="varchar" MaxLength="100" />
+    <Property Name="ExpireTokenForgotPassword" Type="datetime" />
+    <Property Name="TokenDevice" Type="text" />
+    <Property Name="TokenAutoLogin" Type="text" />
+    <Property Name="IsApprove" Type="bit" />
+    <Property Name="Active" Type="bit" />
+    <Property Name="IsVerifyEmail" Type="bit" />
+    <Property Name="IsVerifyPhone" Type="bit" />
+    <Property Name="Balance" Type="varchar" MaxLength="100" />
+    <Property Name="Lat" Type="varchar" MaxLength="100" />
+    <Property Name="Lng" Type="varchar" MaxLength="100" />
+    <Property Name="DateCreated" Type="datetime" />
+    <Property Name="IsBanned" Type="bit" />
+    <Property Name="DateBanned" Type="datetime" />
+    <Property Name="ThumbLicense" Type="varchar" MaxLength="255" />
+    <Property Name="ThumbAvatar" Type="varchar" MaxLength="255" />
+    <Property Name="ThumbIdCard" Type="varchar" MaxLength="255" />
+    <Property Name="MajorID" Type="int" />
+    <Property Name="Sex" Type="int" />
+    <Property Name="TokenFacebook" Type="text" />
+  </EntityType>
+  <Association Name="FK_Account_Group">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="0..1" />
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountRole_Account">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="1" />
+    <End Role="Account_Role" Type="Self.Account_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account_Role">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AccountRole_Role">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Account_Role" Type="Self.Account_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Account_Role">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_BLogs_Category">
+    <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+    <End Role="Blogs" Type="Self.Blogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Blogs">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupRole_Group">
+    <End Role="Groups" Type="Self.Groups" Multiplicity="1" />
+    <End Role="Group_Role" Type="Self.Group_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Group_Role">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GroupRole_Role">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Group_Role" Type="Self.Group_Role" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Group_Role">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Settings_SettingGroup">
+    <End Role="SettingGroup" Type="Self.SettingGroup" Multiplicity="0..1" />
+    <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SettingGroup">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Settings">
+        <PropertyRef Name="SettingGroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Settings_SettingType">
+    <End Role="SettingType" Type="Self.SettingType" Multiplicity="0..1" />
+    <End Role="Settings" Type="Self.Settings" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SettingType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Settings">
+        <PropertyRef Name="SettingTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Transaction_TransactionType">
+    <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Transaction">
+        <PropertyRef Name="TransactionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionDetail_Transaction">
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+    <End Role="TransactionDetails" Type="Self.TransactionDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TransactionDetails">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionTransactionStatus_Transaction">
+    <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+    <End Role="TransactionTransactionStatus" Type="Self.TransactionTransactionStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Transaction">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TransactionTransactionStatus">
+        <PropertyRef Name="TransactionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TransactionTransactionStatus_TransactionStatus">
+    <End Role="TransactionStatus" Type="Self.TransactionStatus" Multiplicity="0..1" />
+    <End Role="TransactionTransactionStatus" Type="Self.TransactionTransactionStatus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TransactionStatus">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="TransactionTransactionStatus">
+        <PropertyRef Name="TransactionStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_GroupUser">
+    <End Role="GroupUser" Type="Self.GroupUser" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GroupUser">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="GroupID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Major">
+    <End Role="Major" Type="Self.Major" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Major">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="MajorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FL_DoctorModelStoreContainer">
+    <EntitySet Name="Account_Role" EntityType="Self.Account_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="API_Logs" EntityType="Self.API_Logs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Group_Role" EntityType="Self.Group_Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Languages" EntityType="Self.Languages" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Resource" EntityType="Self.Resource" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SettingGroup" EntityType="Self.SettingGroup" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SettingType" EntityType="Self.SettingType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionTransactionStatus" EntityType="Self.TransactionTransactionStatus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TransactionType" EntityType="Self.TransactionType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Group" Association="Self.FK_Account_Group">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountRole_Account" Association="Self.FK_AccountRole_Account">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Account_Role" EntitySet="Account_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AccountRole_Role" Association="Self.FK_AccountRole_Role">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Account_Role" EntitySet="Account_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_BLogs_Category" Association="Self.FK_BLogs_Category">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="Blogs" EntitySet="Blogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupRole_Group" Association="Self.FK_GroupRole_Group">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Group_Role" EntitySet="Group_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GroupRole_Role" Association="Self.FK_GroupRole_Role">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Group_Role" EntitySet="Group_Role" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Settings_SettingGroup" Association="Self.FK_Settings_SettingGroup">
+      <End Role="SettingGroup" EntitySet="SettingGroup" />
+      <End Role="Settings" EntitySet="Settings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Settings_SettingType" Association="Self.FK_Settings_SettingType">
+      <End Role="SettingType" EntitySet="SettingType" />
+      <End Role="Settings" EntitySet="Settings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Transaction_TransactionType" Association="Self.FK_Transaction_TransactionType">
+      <End Role="TransactionType" EntitySet="TransactionType" />
+      <End Role="Transaction" EntitySet="Transaction" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionDetail_Transaction" Association="Self.FK_TransactionDetail_Transaction">
+      <End Role="Transaction" EntitySet="Transaction" />
+      <End Role="TransactionDetails" EntitySet="TransactionDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionTransactionStatus_Transaction" Association="Self.FK_TransactionTransactionStatus_Transaction">
+      <End Role="Transaction" EntitySet="Transaction" />
+      <End Role="TransactionTransactionStatus" EntitySet="TransactionTransactionStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TransactionTransactionStatus_TransactionStatus" Association="Self.FK_TransactionTransactionStatus_TransactionStatus">
+      <End Role="TransactionStatus" EntitySet="TransactionStatus" />
+      <End Role="TransactionTransactionStatus" EntitySet="TransactionTransactionStatus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_GroupUser" Association="Self.FK_User_GroupUser">
+      <End Role="GroupUser" EntitySet="GroupUser" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Major" Association="Self.FK_User_Major">
+      <End Role="Major" EntitySet="Major" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FL_DoctorModelStoreContainer" CdmEntityContainer="FL_DoctorEntities">
+    <EntitySetMapping Name="Accounts">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Account">
+        <MappingFragment StoreEntitySet="Accounts">
+          <ScalarProperty Name="DateBanned" ColumnName="DateBanned" />
+          <ScalarProperty Name="IsBanned" ColumnName="IsBanned" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="IsVerifyPhone" ColumnName="IsVerifyPhone" />
+          <ScalarProperty Name="IsVerifyEmail" ColumnName="IsVerifyEmail" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IsAppove" ColumnName="IsAppove" />
+          <ScalarProperty Name="ExpireTokenForgotPassword" ColumnName="ExpireTokenForgotPassword" />
+          <ScalarProperty Name="TokenForgotPassword" ColumnName="TokenForgotPassword" />
+          <ScalarProperty Name="ExpireTokenLogin" ColumnName="ExpireTokenLogin" />
+          <ScalarProperty Name="TokenLogin" ColumnName="TokenLogin" />
+          <ScalarProperty Name="ExpireTokenRegister" ColumnName="ExpireTokenRegister" />
+          <ScalarProperty Name="TokenRegister" ColumnName="TokenRegister" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="IdCardNumber" ColumnName="IdCardNumber" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="API_Logs">
+      <EntityTypeMapping TypeName="FL_DoctorModel.API_Logs">
+        <MappingFragment StoreEntitySet="API_Logs">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Content_Request" ColumnName="Content_Request" />
+          <ScalarProperty Name="User_Request" ColumnName="User_Request" />
+          <ScalarProperty Name="API_Request" ColumnName="API_Request" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Blogs">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Blog">
+        <MappingFragment StoreEntitySet="Blogs">
+          <ScalarProperty Name="DatePost" ColumnName="DatePost" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Tags" ColumnName="Tags" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Groups">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Group">
+        <MappingFragment StoreEntitySet="Groups">
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GroupUsers">
+      <EntityTypeMapping TypeName="FL_DoctorModel.GroupUser">
+        <MappingFragment StoreEntitySet="GroupUser">
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Languages">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Language">
+        <MappingFragment StoreEntitySet="Languages">
+          <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Icon" ColumnName="Icon" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Majors">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Major">
+        <MappingFragment StoreEntitySet="Major">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Content" ColumnName="Content" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ShortDescription" ColumnName="ShortDescription" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Resources">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Resource">
+        <MappingFragment StoreEntitySet="Resource">
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SettingGroups">
+      <EntityTypeMapping TypeName="FL_DoctorModel.SettingGroup">
+        <MappingFragment StoreEntitySet="SettingGroup">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Settings">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Setting">
+        <MappingFragment StoreEntitySet="Settings">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="SettingGroupID" ColumnName="SettingGroupID" />
+          <ScalarProperty Name="SettingTypeID" ColumnName="SettingTypeID" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SettingTypes">
+      <EntityTypeMapping TypeName="FL_DoctorModel.SettingType">
+        <MappingFragment StoreEntitySet="SettingType">
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="FL_DoctorModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="FL_DoctorModel.Transaction">
+        <MappingFragment StoreEntitySet="Transaction">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="TotalPaid" ColumnName="TotalPaid" />
+          <ScalarProperty Name="TotalDiscount" ColumnName="TotalDiscount" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="EndingBalanceReceiver" ColumnName="EndingBalanceReceiver" />
+          <ScalarProperty Name="ReceiverID" ColumnName="ReceiverID" />
+          <ScalarProperty Name="EndingBalanceSender" ColumnName="EndingBalanceSender" />
+          <ScalarProperty Name="SenderID" ColumnName="SenderID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="TransactionCode" ColumnName="TransactionCode" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionDetails">
+      <EntityTypeMapping TypeName="FL_DoctorModel.TransactionDetail">
+        <MappingFragment StoreEntitySet="TransactionDetails">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionStatus">
+      <EntityTypeMapping TypeName="FL_DoctorModel.TransactionStatu">
+        <MappingFragment StoreEntitySet="TransactionStatus">
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTransactionStatus">
+      <EntityTypeMapping TypeName="FL_DoctorModel.TransactionTransactionStatu">
+        <MappingFragment StoreEntitySet="TransactionTransactionStatus">
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="TransactionStatusID" ColumnName="TransactionStatusID" />
+          <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TransactionTypes">
+      <EntityTypeMapping TypeName="FL_DoctorModel.TransactionType">
+        <MappingFragment StoreEntitySet="TransactionType">
+          <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="FL_DoctorModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="TokenFacebook" ColumnName="TokenFacebook" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="MajorID" ColumnName="MajorID" />
+          <ScalarProperty Name="ThumbIdCard" ColumnName="ThumbIdCard" />
+          <ScalarProperty Name="ThumbAvatar" ColumnName="ThumbAvatar" />
+          <ScalarProperty Name="ThumbLicense" ColumnName="ThumbLicense" />
+          <ScalarProperty Name="DateBanned" ColumnName="DateBanned" />
+          <ScalarProperty Name="IsBanned" ColumnName="IsBanned" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Lng" ColumnName="Lng" />
+          <ScalarProperty Name="Lat" ColumnName="Lat" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="IsVerifyPhone" ColumnName="IsVerifyPhone" />
+          <ScalarProperty Name="IsVerifyEmail" ColumnName="IsVerifyEmail" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="IsApprove" ColumnName="IsApprove" />
+          <ScalarProperty Name="TokenAutoLogin" ColumnName="TokenAutoLogin" />
+          <ScalarProperty Name="TokenDevice" ColumnName="TokenDevice" />
+          <ScalarProperty Name="ExpireTokenForgotPassword" ColumnName="ExpireTokenForgotPassword" />
+          <ScalarProperty Name="TokenForgotPassword" ColumnName="TokenForgotPassword" />
+          <ScalarProperty Name="ExpireTokenLogin" ColumnName="ExpireTokenLogin" />
+          <ScalarProperty Name="TokenLogin" ColumnName="TokenLogin" />
+          <ScalarProperty Name="ExpireTokenRegister" ColumnName="ExpireTokenRegister" />
+          <ScalarProperty Name="TokenRegister" ColumnName="TokenRegister" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="IdCardNumber" ColumnName="IdCardNumber" />
+          <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="GUID" ColumnName="GUID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Account_Role" TypeName="FL_DoctorModel.Account_Role" StoreEntitySet="Account_Role">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="ID" ColumnName="RoleID" />
+      </EndProperty>
+      <EndProperty Name="Account">
+        <ScalarProperty Name="ID" ColumnName="AccountID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="Group_Role" TypeName="FL_DoctorModel.Group_Role" StoreEntitySet="Group_Role">
+      <EndProperty Name="Role">
+        <ScalarProperty Name="ID" ColumnName="RoleID" />
+      </EndProperty>
+      <EndProperty Name="Group">
+        <ScalarProperty Name="ID" ColumnName="GroupID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
