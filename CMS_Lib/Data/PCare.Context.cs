@@ -29,6 +29,7 @@ namespace CMS_Lib.Data
         public virtual DbSet<API_Logs> API_Logs { get; set; }
         public virtual DbSet<Blog> Blogs { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Coupon> Coupons { get; set; }
         public virtual DbSet<Group> Groups { get; set; }
         public virtual DbSet<GroupUser> GroupUsers { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
@@ -40,6 +41,7 @@ namespace CMS_Lib.Data
         public virtual DbSet<SettingType> SettingTypes { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<TransactionCoupon> TransactionCoupons { get; set; }
         public virtual DbSet<TransactionDetail> TransactionDetails { get; set; }
         public virtual DbSet<TransactionStatu> TransactionStatus { get; set; }
         public virtual DbSet<TransactionTransactionStatu> TransactionTransactionStatus { get; set; }

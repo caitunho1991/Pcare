@@ -14,6 +14,13 @@ namespace CMS_Lib.Data
     
     public partial class User
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Transactions = new HashSet<Transaction>();
+            this.Transactions1 = new HashSet<Transaction>();
+        }
+    
         public int ID { get; set; }
         public string GUID { get; set; }
         public string FirstName { get; set; }
@@ -55,5 +62,9 @@ namespace CMS_Lib.Data
     
         public virtual GroupUser GroupUser { get; set; }
         public virtual Major Major { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions1 { get; set; }
     }
 }

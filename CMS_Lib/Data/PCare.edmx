@@ -85,6 +85,25 @@
           <Property Name="Active" Type="bit" />
           <Property Name="LanguageCode" Type="varchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+          <Property Name="Content" Type="ntext" />
+          <Property Name="Count" Type="int" />
+          <Property Name="CountPerUser" Type="int" />
+          <Property Name="Code" Type="varchar" MaxLength="100" />
+          <Property Name="DateStart" Type="datetime" />
+          <Property Name="DateEnd" Type="datetime" />
+          <Property Name="DateCreated" Type="datetime" />
+          <Property Name="IsDelete" Type="bit" />
+          <Property Name="DateDeleted" Type="datetime" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="PercentValue" Type="float" />
+        </EntityType>
         <EntityType Name="Group_Role">
           <Key>
             <PropertyRef Name="GroupID" />
@@ -215,6 +234,14 @@
           <Property Name="TotalDiscount" Type="varchar(max)" />
           <Property Name="TotalPaid" Type="varchar(max)" />
           <Property Name="DateCreated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TransactionCoupon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionID" Type="int" />
+          <Property Name="CouponID" Type="int" />
         </EntityType>
         <EntityType Name="TransactionDetails">
           <Key>
@@ -397,6 +424,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transaction_Receiver">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="ReceiverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Sender">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="SenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transaction_TransactionType">
           <End Role="TransactionType" Type="Self.TransactionType" Multiplicity="0..1" />
           <End Role="Transaction" Type="Self.Transaction" Multiplicity="*" />
@@ -406,6 +457,30 @@
             </Principal>
             <Dependent Role="Transaction">
               <PropertyRef Name="TransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionCoupon_Coupon">
+          <End Role="Coupon" Type="Self.Coupon" Multiplicity="0..1" />
+          <End Role="TransactionCoupon" Type="Self.TransactionCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionCoupon">
+              <PropertyRef Name="CouponID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionCoupon_Transaction">
+          <End Role="Transaction" Type="Self.Transaction" Multiplicity="0..1" />
+          <End Role="TransactionCoupon" Type="Self.TransactionCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionCoupon">
+              <PropertyRef Name="TransactionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -475,6 +550,7 @@
           <EntitySet Name="API_Logs" EntityType="Self.API_Logs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Blogs" EntityType="Self.Blogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coupon" EntityType="Self.Coupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Group_Role" EntityType="Self.Group_Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Groups" EntityType="Self.Groups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="GroupUser" EntityType="Self.GroupUser" Schema="dbo" store:Type="Tables" />
@@ -487,6 +563,7 @@
           <EntitySet Name="SettingType" EntityType="Self.SettingType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transaction" EntityType="Self.Transaction" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionCoupon" EntityType="Self.TransactionCoupon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionStatus" EntityType="Self.TransactionStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionTransactionStatus" EntityType="Self.TransactionTransactionStatus" Schema="dbo" store:Type="Tables" />
@@ -524,9 +601,25 @@
             <End Role="SettingType" EntitySet="SettingType" />
             <End Role="Settings" EntitySet="Settings" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Receiver" Association="Self.FK_Transaction_Receiver">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Sender" Association="Self.FK_Transaction_Sender">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
           <AssociationSet Name="FK_Transaction_TransactionType" Association="Self.FK_Transaction_TransactionType">
             <End Role="TransactionType" EntitySet="TransactionType" />
             <End Role="Transaction" EntitySet="Transaction" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionCoupon_Coupon" Association="Self.FK_TransactionCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupon" />
+            <End Role="TransactionCoupon" EntitySet="TransactionCoupon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionCoupon_Transaction" Association="Self.FK_TransactionCoupon_Transaction">
+            <End Role="Transaction" EntitySet="Transaction" />
+            <End Role="TransactionCoupon" EntitySet="TransactionCoupon" />
           </AssociationSet>
           <AssociationSet Name="FK_TransactionDetail_Transaction" Association="Self.FK_TransactionDetail_Transaction">
             <End Role="Transaction" EntitySet="Transaction" />
@@ -558,6 +651,7 @@
           <EntitySet Name="API_Logs" EntityType="FL_DoctorModel.API_Logs" />
           <EntitySet Name="Blogs" EntityType="FL_DoctorModel.Blog" />
           <EntitySet Name="Categories" EntityType="FL_DoctorModel.Category" />
+          <EntitySet Name="Coupons" EntityType="FL_DoctorModel.Coupon" />
           <EntitySet Name="Groups" EntityType="FL_DoctorModel.Group" />
           <EntitySet Name="GroupUsers" EntityType="FL_DoctorModel.GroupUser" />
           <EntitySet Name="Languages" EntityType="FL_DoctorModel.Language" />
@@ -569,6 +663,7 @@
           <EntitySet Name="SettingTypes" EntityType="FL_DoctorModel.SettingType" />
           <EntitySet Name="sysdiagrams" EntityType="FL_DoctorModel.sysdiagram" />
           <EntitySet Name="Transactions" EntityType="FL_DoctorModel.Transaction" />
+          <EntitySet Name="TransactionCoupons" EntityType="FL_DoctorModel.TransactionCoupon" />
           <EntitySet Name="TransactionDetails" EntityType="FL_DoctorModel.TransactionDetail" />
           <EntitySet Name="TransactionStatus" EntityType="FL_DoctorModel.TransactionStatu" />
           <EntitySet Name="TransactionTransactionStatus" EntityType="FL_DoctorModel.TransactionTransactionStatu" />
@@ -581,6 +676,10 @@
           <AssociationSet Name="FK_BLogs_Category" Association="FL_DoctorModel.FK_BLogs_Category">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Blog" EntitySet="Blogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionCoupon_Coupon" Association="FL_DoctorModel.FK_TransactionCoupon_Coupon">
+            <End Role="Coupon" EntitySet="Coupons" />
+            <End Role="TransactionCoupon" EntitySet="TransactionCoupons" />
           </AssociationSet>
           <AssociationSet Name="FK_User_GroupUser" Association="FL_DoctorModel.FK_User_GroupUser">
             <End Role="GroupUser" EntitySet="GroupUsers" />
@@ -598,9 +697,21 @@
             <End Role="SettingType" EntitySet="SettingTypes" />
             <End Role="Setting" EntitySet="Settings" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Receiver" Association="FL_DoctorModel.FK_Transaction_Receiver">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transaction_Sender" Association="FL_DoctorModel.FK_Transaction_Sender">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
           <AssociationSet Name="FK_Transaction_TransactionType" Association="FL_DoctorModel.FK_Transaction_TransactionType">
             <End Role="TransactionType" EntitySet="TransactionTypes" />
             <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TransactionCoupon_Transaction" Association="FL_DoctorModel.FK_TransactionCoupon_Transaction">
+            <End Role="Transaction" EntitySet="Transactions" />
+            <End Role="TransactionCoupon" EntitySet="TransactionCoupons" />
           </AssociationSet>
           <AssociationSet Name="FK_TransactionDetail_Transaction" Association="FL_DoctorModel.FK_TransactionDetail_Transaction">
             <End Role="Transaction" EntitySet="Transactions" />
@@ -698,6 +809,26 @@
           <Property Name="Active" Type="Boolean" />
           <Property Name="LanguageCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Blogs" Relationship="FL_DoctorModel.FK_BLogs_Category" FromRole="Category" ToRole="Blog" />
+        </EntityType>
+        <EntityType Name="Coupon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Count" Type="Int32" />
+          <Property Name="CountPerUser" Type="Int32" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DateStart" Type="DateTime" Precision="3" />
+          <Property Name="DateEnd" Type="DateTime" Precision="3" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <Property Name="IsDelete" Type="Boolean" />
+          <Property Name="DateDeleted" Type="DateTime" Precision="3" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="PercentValue" Type="Double" />
+          <NavigationProperty Name="TransactionCoupons" Relationship="FL_DoctorModel.FK_TransactionCoupon_Coupon" FromRole="Coupon" ToRole="TransactionCoupon" />
         </EntityType>
         <EntityType Name="Group">
           <Key>
@@ -831,9 +962,22 @@
           <Property Name="TotalDiscount" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TotalPaid" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DateCreated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="FL_DoctorModel.FK_Transaction_Receiver" FromRole="Transaction" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="FL_DoctorModel.FK_Transaction_Sender" FromRole="Transaction" ToRole="User" />
           <NavigationProperty Name="TransactionType" Relationship="FL_DoctorModel.FK_Transaction_TransactionType" FromRole="Transaction" ToRole="TransactionType" />
+          <NavigationProperty Name="TransactionCoupons" Relationship="FL_DoctorModel.FK_TransactionCoupon_Transaction" FromRole="Transaction" ToRole="TransactionCoupon" />
           <NavigationProperty Name="TransactionDetails" Relationship="FL_DoctorModel.FK_TransactionDetail_Transaction" FromRole="Transaction" ToRole="TransactionDetail" />
           <NavigationProperty Name="TransactionTransactionStatus" Relationship="FL_DoctorModel.FK_TransactionTransactionStatus_Transaction" FromRole="Transaction" ToRole="TransactionTransactionStatu" />
+        </EntityType>
+        <EntityType Name="TransactionCoupon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionID" Type="Int32" />
+          <Property Name="CouponID" Type="Int32" />
+          <NavigationProperty Name="Coupon" Relationship="FL_DoctorModel.FK_TransactionCoupon_Coupon" FromRole="TransactionCoupon" ToRole="Coupon" />
+          <NavigationProperty Name="Transaction" Relationship="FL_DoctorModel.FK_TransactionCoupon_Transaction" FromRole="TransactionCoupon" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="TransactionDetail">
           <Key>
@@ -926,6 +1070,8 @@
           <Property Name="TokenFacebook" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="GroupUser" Relationship="FL_DoctorModel.FK_User_GroupUser" FromRole="User" ToRole="GroupUser" />
           <NavigationProperty Name="Major" Relationship="FL_DoctorModel.FK_User_Major" FromRole="User" ToRole="Major" />
+          <NavigationProperty Name="Transactions" Relationship="FL_DoctorModel.FK_Transaction_Receiver" FromRole="User" ToRole="Transaction" />
+          <NavigationProperty Name="Transactions1" Relationship="FL_DoctorModel.FK_Transaction_Sender" FromRole="User" ToRole="Transaction" />
         </EntityType>
         <Association Name="FK_Account_Group">
           <End Type="FL_DoctorModel.Group" Role="Group" Multiplicity="0..1" />
@@ -948,6 +1094,18 @@
             </Principal>
             <Dependent Role="Blog">
               <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionCoupon_Coupon">
+          <End Type="FL_DoctorModel.Coupon" Role="Coupon" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.TransactionCoupon" Role="TransactionCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coupon">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionCoupon">
+              <PropertyRef Name="CouponID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -999,6 +1157,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transaction_Receiver">
+          <End Type="FL_DoctorModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="ReceiverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transaction_Sender">
+          <End Type="FL_DoctorModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="SenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transaction_TransactionType">
           <End Type="FL_DoctorModel.TransactionType" Role="TransactionType" Multiplicity="0..1" />
           <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="*" />
@@ -1008,6 +1190,18 @@
             </Principal>
             <Dependent Role="Transaction">
               <PropertyRef Name="TransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TransactionCoupon_Transaction">
+          <End Type="FL_DoctorModel.Transaction" Role="Transaction" Multiplicity="0..1" />
+          <End Type="FL_DoctorModel.TransactionCoupon" Role="TransactionCoupon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Transaction">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TransactionCoupon">
+              <PropertyRef Name="TransactionID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1132,6 +1326,26 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Thumbnail" ColumnName="Thumbnail" />
                 <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coupons">
+            <EntityTypeMapping TypeName="FL_DoctorModel.Coupon">
+              <MappingFragment StoreEntitySet="Coupon">
+                <ScalarProperty Name="PercentValue" ColumnName="PercentValue" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="DateDeleted" ColumnName="DateDeleted" />
+                <ScalarProperty Name="IsDelete" ColumnName="IsDelete" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="DateEnd" ColumnName="DateEnd" />
+                <ScalarProperty Name="DateStart" ColumnName="DateStart" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CountPerUser" ColumnName="CountPerUser" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
@@ -1267,6 +1481,15 @@
                 <ScalarProperty Name="SenderID" ColumnName="SenderID" />
                 <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
                 <ScalarProperty Name="TransactionCode" ColumnName="TransactionCode" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TransactionCoupons">
+            <EntityTypeMapping TypeName="FL_DoctorModel.TransactionCoupon">
+              <MappingFragment StoreEntitySet="TransactionCoupon">
+                <ScalarProperty Name="CouponID" ColumnName="CouponID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>

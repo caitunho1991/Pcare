@@ -17,6 +17,7 @@ namespace CMS_Lib.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Transaction()
         {
+            this.TransactionCoupons = new HashSet<TransactionCoupon>();
             this.TransactionDetails = new HashSet<TransactionDetail>();
             this.TransactionTransactionStatus = new HashSet<TransactionTransactionStatu>();
         }
@@ -33,7 +34,11 @@ namespace CMS_Lib.Data
         public string TotalPaid { get; set; }
         public Nullable<System.DateTime> DateCreated { get; set; }
     
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
         public virtual TransactionType TransactionType { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransactionCoupon> TransactionCoupons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TransactionDetail> TransactionDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

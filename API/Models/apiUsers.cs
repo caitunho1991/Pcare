@@ -345,28 +345,40 @@ namespace API.Models
         public string Lng { get; set; }
         public string UpdateStatusUser(string token)
         {
-            try
+            using (FL_DoctorEntities __context = new FL_DoctorEntities())
             {
-                using (FL_DoctorEntities __context = new FL_DoctorEntities())
+                if (__context.Users.Any(x => x.TokenLogin.Equals(token)))
                 {
-                    if (__context.Users.Any(x=>x.TokenLogin.Equals(token)))
-                    {
-                        var user = __context.Users.Single(x=>x.TokenLogin.Equals(token));
-                        user.Active = !(user.Active);
-                        user.Lat = this.Lat;
-                        user.Lng = this.Lng;
-                        __context.SaveChanges();
+                    var user = __context.Users.Single(x => x.TokenLogin.Equals(token));
+                    user.Active = !(user.Active);
+                    user.Lat = this.Lat;
+                    user.Lng = this.Lng;
+                    __context.SaveChanges();
 
-                        return user.GUID;
-                    }
-                    else
-                    {
-                        return null;
-                    }
+                    return user.GUID;
+                }
+                else
+                {
+                    return null;
                 }
             }
-            catch (Exception e)
+        }
+    }
+    public class VM_User_Verify
+    {
+        public string UserName { get; set; }
+        public string VerifyUser()
+        {
+            using (FL_DoctorEntities __context = new FL_DoctorEntities())
             {
+                if (__context.Users.Any(x=>x.Username.Equals(this.UserName)))
+                {
+                    var user = __context.Users.Single(x=>x.Username.Equals(this.UserName));
+                    user.TokenForgotPassword = CMS_Helper.GenerateGUID();
+                    user.ExpireTokenForgotPassword = DateTime.Now;
+                    __context.SaveChanges();
+                    return user.TokenForgotPassword;
+                }
                 return null;
             }
         }
@@ -383,9 +395,9 @@ namespace API.Models
         public string UserName { get; set; }
         public string Address { get; set; }
         public string IDCardNumber { get; set; }
-        public string ImgAvatar { get; set; }
-        public string ImgLicenseId { get; set; }
-        public string ImgIdCard { get; set; }
+        public string ThumbAvatar { get; set; }
+        public string ThumbLicense { get; set; }
+        public string ThumbIdCard { get; set; }
         public string TokenLogin { get; set; }
         public bool IsDoctor { get; set; }
         public bool Active { get; set; }
@@ -393,59 +405,32 @@ namespace API.Models
         public string MajorCode { get; set; }
         public int Sex { get; set; }
         public string TokenAutoLogin { get; set; }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="user">user = GUID / TokenLogin</param>
-        /// <returns></returns>
+        
         public VM_User_Response SingleResponse(string user)
         {
             using (FL_DoctorEntities __context = new FL_DoctorEntities())
             {
-                return __context.Users.Where(x => x.GUID.Equals(user) || x.ExpireTokenLogin.Equals(user)).Select(x => new VM_User_Response
+                return __context.Users.Where(x => x.GUID.Equals(user) || x.TokenLogin.Equals(user) || x.TokenForgotPassword.Equals(user)).Select(x => new VM_User_Response
                 {
                     FullName = x.FullName,
                     TokenLogin = x.TokenLogin,
                     IsDoctor = (x.GroupUser.Code == "doctor" ? true : false),
                     FirstName = x.FirstName,
                     LastName = x.LastName,
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
                     IDCardNumber = x.IdCardNumber,
-                    DateOfBirth = DateOfBirth,
+                    DateOfBirth = x.DateOfBirth.ToString(),
                     Sex = (int)x.Sex,
                     UserName = x.Username,
                     Active = (bool)x.Active,
                     Balance = x.Balance,
-                    ImgAvatar = string.IsNullOrEmpty(x.ThumbAvatar) == true ? "" : "/Uploads/" + x.ThumbAvatar,
-                    ImgLicenseId = string.IsNullOrEmpty(x.ThumbLicense) == true ? "" : "/Uploads/" + x.ThumbLicense,
-                    ImgIdCard = string.IsNullOrEmpty(x.Thumbnail) == true ? "" : "/Uploads/" + x.ThumbIdCard,
-                    MajorCode = x.MajorID.ToString()
+                    ThumbAvatar = string.IsNullOrEmpty(x.ThumbAvatar) == true ? "" : "/Uploads/" + x.ThumbAvatar,
+                    ThumbLicense = string.IsNullOrEmpty(x.ThumbLicense) == true ? "" : "/Uploads/" + x.ThumbLicense,
+                    ThumbIdCard = string.IsNullOrEmpty(x.ThumbIdCard) == true ? "" : "/Uploads/" + x.ThumbIdCard,
+                    MajorCode = x.MajorID.ToString(),
+                    TokenAutoLogin = x.TokenAutoLogin
                 }).Single();
-            }
-        }
-
-        public List<VM_User_Response> ListResponse()
-        {
-            using (FL_DoctorEntities __context = new FL_DoctorEntities())
-            {
-                return __context.Users.Select(x => new VM_User_Response
-                {
-                    FullName = x.FullName,
-                    TokenLogin = x.TokenLogin,
-                    IsDoctor = (x.GroupUser.Code == "doctor" ? true : false),
-                    FirstName = x.FirstName,
-                    LastName = x.LastName,
-                    IDCardNumber = x.IdCardNumber,
-                    DateOfBirth = DateOfBirth,
-                    Sex = (int)x.Sex,
-                    UserName = x.Username,
-                    Active = (bool)x.Active,
-                    Balance = x.Balance,
-                    ImgAvatar = string.IsNullOrEmpty(x.ThumbAvatar) == true ? "" : "/Uploads/" + x.ThumbAvatar,
-                    ImgLicenseId = string.IsNullOrEmpty(x.ThumbLicense) == true ? "" : "/Uploads/" + x.ThumbLicense,
-                    ImgIdCard = string.IsNullOrEmpty(x.Thumbnail) == true ? "" : "/Uploads/" + x.ThumbIdCard,
-                    MajorCode = x.MajorID.ToString()
-                }).ToList();
             }
         }
         public List<VM_User_Response> ListWithRadiusResponse(string user, int MajorCode)
@@ -481,18 +466,22 @@ namespace API.Models
                     IsDoctor = (x.GroupUser.Code == "doctor" ? true : false),
                     FirstName = x.FirstName,
                     LastName = x.LastName,
+                    Email = x.Email,
+                    PhoneNumber = x.PhoneNumber,
                     IDCardNumber = x.IdCardNumber,
-                    DateOfBirth = DateOfBirth,
+                    DateOfBirth = x.DateOfBirth.ToString(),
                     Sex = (int)x.Sex,
                     UserName = x.Username,
                     Active = (bool)x.Active,
                     Balance = x.Balance,
-                    ImgAvatar = string.IsNullOrEmpty(x.ThumbAvatar) == true ? "" : "/Uploads/" + x.ThumbAvatar,
-                    ImgLicenseId = string.IsNullOrEmpty(x.ThumbLicense) == true ? "" : "/Uploads/" + x.ThumbLicense,
-                    ImgIdCard = string.IsNullOrEmpty(x.Thumbnail) == true ? "" : "/Uploads/" + x.ThumbIdCard,
-                    MajorCode = x.MajorID.ToString()
+                    ThumbAvatar = string.IsNullOrEmpty(x.ThumbAvatar) == true ? "" : "/Uploads/" + x.ThumbAvatar,
+                    ThumbLicense = string.IsNullOrEmpty(x.ThumbLicense) == true ? "" : "/Uploads/" + x.ThumbLicense,
+                    ThumbIdCard = string.IsNullOrEmpty(x.ThumbIdCard) == true ? "" : "/Uploads/" + x.ThumbIdCard,
+                    MajorCode = x.MajorID.ToString(),
+                    TokenAutoLogin = x.TokenAutoLogin
                 }).ToList();
             }
         }
+        
     }
 }

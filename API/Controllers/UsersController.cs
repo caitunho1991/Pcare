@@ -68,16 +68,16 @@ namespace API.Controllers
                 {
                     return Content(HttpStatusCode.BadRequest, response.BadRequest(string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage))));
                 }
-                var UserGUID = req.Login();
-                if (!string.IsNullOrEmpty(UserGUID))
+                var user = req.Login();
+                if (!string.IsNullOrEmpty(user))
                 {
-                    return Content(HttpStatusCode.OK, response.Ok(res.SingleResponse(UserGUID), "Đăng nhập thành công."));
+                    return Content(HttpStatusCode.OK, response.Ok(res.SingleResponse(user), "Đăng nhập thành công."));
                 }
                 return Content(HttpStatusCode.BadRequest, response.BadRequest("Tên đăng nhập hoặc mật khẩu không đúng. Vui lòng kiểm tra lại."));
             }
             catch (Exception e)
             {
-                return Content(HttpStatusCode.BadGateway, response.BadRequest("Có lỗi trong quá trình xử lý"));
+                return Content(HttpStatusCode.BadRequest, response.BadRequest("Có lỗi trong quá trình xử lý"));
             }
         }
 
@@ -302,43 +302,24 @@ namespace API.Controllers
         /// </summary>
         /// <param name="req"></param>
         /// <returns></returns>
-        //[Route("Accounts/VerifyAccount")]
-        //[HttpPost]
-        //public IHttpActionResult VerifyAccount(VM_Account_Req_Verify req)
-        //{
-        //    try
-        //    {
-        //        Response<VM_Account_Res_Verify> response = new Response<VM_Account_Res_Verify>();
-        //        if (string.IsNullOrEmpty(req.Username))
-        //        {
-        //            return Ok(response.BadRequest("Số điện thoại hoặc email không hợp lệ. Vui lòng kiểm tra lại"));
-        //        }
-        //        if (_context.Accounts.Any(x => x.PhoneNumber.Equals(req.Username) || x.Email.ToUpper().Equals(req.Username.ToUpper())))
-        //        {
-        //            var acc = _context.Accounts.SingleOrDefault(x => x.PhoneNumber.Equals(req.Username) || x.Email.ToUpper().Equals(req.Username.ToUpper()));
-        //            if (acc != null)
-        //            {
-        //                acc.TokenAutoLogin = CMS_Security.SHA1(acc.DeviceToken + "-" + acc.Password + "-" + acc.PhoneNumber);
-        //                acc.TokenLogin = CMS_Security.GenerateGUID().ToString();
-        //                int token_time = 0;
-        //                int.TryParse(CMS_Lib.Resource("cms_token_time"), out token_time);
-        //                acc.ExpireTokenLogin = DateTime.Now.AddDays(token_time);
-        //                _context.SaveChanges();
-
-        //            }
-        //            var res = _context.Accounts.Where(x => x.PhoneNumber.Equals(req.Username) || x.Email.ToUpper().Equals(req.Username.ToUpper())).Select(x => new VM_Account_Res_Verify
-        //            {
-        //                Token = x.TokenLogin
-        //            }).SingleOrDefault();
-        //            return Ok(response.Ok(res, "Xác thực tài khoản thành công."));
-        //        }
-        //        return Ok(response.Ok(null, "Tài khoản không tồn tại trong hệ thống.", false));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Content(HttpStatusCode.BadRequest, response.BadRequest("Có lỗi trong quá trình xử lý"));
-        //    }
-        //}
+        [Route("Accounts/VerifyAccount")]
+        [HttpPost]
+        public IHttpActionResult VerifyAccount(VM_User_Verify req)
+        {
+            try
+            {
+                var user = req.VerifyUser();
+                if (!string.IsNullOrEmpty(user))
+                {
+                    return Content(HttpStatusCode.OK, response.Ok(res.SingleResponse(user), "Xác thực tài khoản thành công."));
+                }
+                return Content(HttpStatusCode.OK, response.Ok(null, "Tài khoản không tồn tại trong hệ thống.", false));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.BadRequest, response.BadRequest("Có lỗi trong quá trình xử lý"));
+            }
+        }
         #endregion
 
     }

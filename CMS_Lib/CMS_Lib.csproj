@@ -76,6 +76,9 @@
     <Compile Include="Data\Category.cs">
       <DependentUpon>PCare.tt</DependentUpon>
     </Compile>
+    <Compile Include="Data\Coupon.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
     <Compile Include="Data\Group.cs">
       <DependentUpon>PCare.tt</DependentUpon>
     </Compile>
@@ -122,6 +125,9 @@
       <DependentUpon>PCare.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\Transaction.cs">
+      <DependentUpon>PCare.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Data\TransactionCoupon.cs">
       <DependentUpon>PCare.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\TransactionDetail.cs">
