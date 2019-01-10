@@ -27,6 +27,10 @@ namespace API.Controllers
                 {
                     return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
                 }
+                if (res.CheckTransaction(token)!=true)
+                {
+                    return Content(HttpStatusCode.BadRequest, response.BadRequest("Tài khoản không có giao dịch hoặc không đúng."));
+                }
                 return Content(HttpStatusCode.OK, response.Ok(res.ListResponseWithType(token, "order"), "Lấy danh sách giao dịch thành công."));
             }
             catch (Exception e)
@@ -49,6 +53,10 @@ namespace API.Controllers
                 if (!checkAuth(token))
                 {
                     return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
+                }
+                if (res.CheckTransaction(token) != true)
+                {
+                    return Content(HttpStatusCode.BadRequest, response.BadRequest("Tài khoản không có giao dịch hoặc không đúng."));
                 }
                 return Content(HttpStatusCode.OK, response.Ok(res.ListResponseWithTypeAndStatus(token, "order", "success"), "Lấy danh sách giao dịch đã xác nhận thành công."));
             }
@@ -73,6 +81,11 @@ namespace API.Controllers
                 {
                     return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
                 }
+
+                if (res.CheckTransaction(token) != true)
+                {
+                    return Content(HttpStatusCode.BadRequest, response.BadRequest("Tài khoản không có giao dịch hoặc không đúng."));
+                }
                 return Content(HttpStatusCode.OK, response.Ok(res.ListResponseWithTypeAndStatus(token, "order", "cancel"), "Lấy danh sách giao dịch đã xác nhận thành công."));
             }
             catch (Exception e)
@@ -95,6 +108,10 @@ namespace API.Controllers
                 if (!checkAuth(token))
                 {
                     return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
+                }
+                if (res.CheckTransaction(token) != true)
+                {
+                    return Content(HttpStatusCode.BadRequest, response.BadRequest("Tài khoản không có giao dịch hoặc không đúng."));
                 }
                 return Content(HttpStatusCode.OK, response.Ok(res.ListResponseWithTypeAndStatus(token, "order", "order_create"), "Lấy danh sách giao dịch chưa xác nhận thành công."));
             }
@@ -120,6 +137,11 @@ namespace API.Controllers
                 {
                     return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
                 }
+
+                if (res.CheckTransaction(token) != true)
+                {
+                    return Content(HttpStatusCode.BadRequest, response.BadRequest("Tài khoản không có giao dịch hoặc không đúng."));
+                }
                 return Content(HttpStatusCode.OK, response.Ok(res.SingleResponse(token, TransactionCode), "Lấy thông tin giao dịch thành công."));
             }
             catch (Exception e)
@@ -128,109 +150,34 @@ namespace API.Controllers
             }
         }
 
-        ///// <summary>
-        ///// Tạo mới đơn hàng
-        ///// </summary>
-        ///// <param name="req"></param>
-        ///// <param name="token"></param>
-        ///// <returns></returns>
-        //[HttpPost]
-        //[Route("Order/{token}")]
-        //public IHttpActionResult Order(VM_Order req, string token)
-        //{
-        //    try
-        //    {
-        //        CMS_Lib.CMS_Logs("API Orer", JsonConvert.SerializeObject(req), "");
-        //        if (!checkAuth(token))
-        //        {
-        //            return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
-        //        }
-        //        if (!_context.Accounts.Any(x => x.GUID.Equals(req.GuidDoctor)))
-        //        {
-        //            return Ok(response.BadRequest("Không tìm thấy thông tin bác sỹ"));
-        //        }
-        //        var doctor = _context.Accounts.SingleOrDefault(x => x.GUID.Equals(req.GuidDoctor) && x.IsBanned != true);
-        //        if (doctor == null)
-        //        {
-        //            return Ok(response.BadRequest("Tài khoản bác sỹ đã bị khóa vui lòng kiểm tra lại"));
-        //        }
-        //        var patient = _context.Accounts.SingleOrDefault(x => x.TokenLogin.Equals(token));
-        //        var coupon = _context.Coupons.SingleOrDefault(x => x.Code.ToUpper().Equals(req.Coupon.ToUpper()) && x.Count > 0);
-        //        decimal global_min_fee_doctor = 0;
-        //        decimal.TryParse(CMS_Lib.Resource("global_min_fee_doctor"), out global_min_fee_doctor);
-        //        if (doctor.Balance >= doctor.Product.price)
-        //        {
-        //            Order o = new Order();
-        //            //tạo đơn hàng
-        //            o.idBuyer = patient.ID;
-        //            o.idReceive = doctor.ID;
-        //            o.dateCreate = DateTime.Now;
-        //            o.discount = 0;
-        //            o.idProduct = doctor.ProductId;
-        //            o.total = doctor.Product.price;
-        //            o.totalPay = o.total - o.discount;
-        //            o.idOrderType = 1;
-        //            _context.Orders.Add(o);
-        //            var orderStatus = _context.OrderStatus.SingleOrDefault(x => x.code.Contains("order_create"));
-        //            o.OrderStatus.Add(orderStatus);
-        //            _context.SaveChanges();
-
-        //            //check coupon
-        //            if (coupon != null && DateTime.Compare(DateTime.Now, (DateTime)coupon.DateStart) >= 0 && DateTime.Compare((DateTime)coupon.DateEnd, DateTime.Now) >= 0)
-        //            {
-        //                if (!_context.OrderCouponAccounts.Any(x => x.AccountID == patient.ID && x.CouponID == coupon.ID))
-        //                {
-        //                    if (coupon.Value != null)
-        //                    {
-        //                        o.discount = coupon.Value;
-        //                        o.totalPay = o.total - o.discount;
-        //                    }
-        //                    if (coupon.Percent != null)
-        //                    {
-        //                        o.discount = doctor.Product.price * coupon.Percent / 100;
-        //                        o.totalPay = o.total - o.discount;
-        //                    }
-        //                    coupon.Count = coupon.Count - 1;
-        //                    OrderCouponAccount o_tmp = new OrderCouponAccount();
-        //                    o_tmp.AccountID = patient.ID;
-        //                    o_tmp.CouponID = coupon.ID;
-        //                    o_tmp.OrderID = o.id;
-        //                    o_tmp.DateCreate = DateTime.Now;
-        //                    _context.OrderCouponAccounts.Add(o_tmp);
-        //                    _context.SaveChanges();
-        //                }
-        //            }
-        //            //trừ tiền bác sỹ
-        //            doctor.Balance = doctor.Balance - o.totalPay;
-        //            //tạo mã đơn hàng
-        //            o.code = CMS_Security.createTransactionIDString(o.id);
-        //            o.idOrderStatus = orderStatus.id;
-        //            _context.SaveChanges();
-        //            //CMS_Lib.PushNotify(patient.DeviceToken, "PCare", "Lịch hẹn đã được gửi đến bác sỹ.", "patient");
-        //            CMS_Lib.PushNotify(doctor.DeviceToken, "PCare", "Bạn vừa nhận được một lịch hẹn.", "doctor");
-        //            var tmp_dateofbirth = ((DateTime)o.dateCreate).ToString("dd/MM/yyyy");
-        //            var tmp_datecreate = ((DateTime)o.Account.BirthDay).ToString("dd/MM/yyyy");
-        //            var res = _context.Orders.Where(x => x.code.Contains(o.code)).Select(x => new VM_Order_Respone
-        //            {
-        //                OrderNumber = x.code,
-        //                DateCreate = tmp_datecreate,
-        //                DoctorName = x.Account1.FullName,
-        //                MajorDescription = x.Account1.Product.shortDesc,
-        //                PatientName = x.Account.FullName,
-        //                Sex = (int)x.Account.Sex,
-        //                DateOfBirth = tmp_dateofbirth,
-        //                Address = x.Account.Address,
-        //                PhoneNumber = x.Account.PhoneNumber
-        //            }).SingleOrDefault();
-        //            return Ok(responseSingle.Ok(res, "Đặt đơn hàng thành công."));
-        //        }
-        //        return Ok(response.BadRequest("Tài khoản bác sỹ không đủ để đặt hẹn. Vui lòng chọn bác sỹ khác."));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        return Content(HttpStatusCode.BadRequest, response.BadRequest("Có lỗi trong quá trình xử lý."));
-        //    }
-        //}
+        /// <summary>
+        /// Tạo mới đơn hàng
+        /// </summary>
+        /// <param name="req"></param>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("Order/{token}")]
+        public IHttpActionResult Order(VM_Transaction req, string token)
+        {
+            try
+            {
+                if (!checkAuth(token))
+                {
+                    return Content(HttpStatusCode.Unauthorized, response.UnAuthorize("Tài khoản không đúng hoặc không có quyền truy cập. Vui lòng kiểm tra lại."));
+                }
+                var transactionCode = req.Create(token);
+                if (string.IsNullOrEmpty(transactionCode))
+                {
+                    return Content(HttpStatusCode.OK, response.Ok(null, "Giao dịch thất bại. Vui lòng kiểm tra lại.", false));
+                }
+                return Content(HttpStatusCode.OK, response.Ok(res.SingleResponse(token, transactionCode), "Giao dịch thực hiện thành công."));
+            }
+            catch (Exception e)
+            {
+                return Content(HttpStatusCode.BadRequest, response.BadRequest("Có lỗi trong quá trình xử lý."));
+            }
+        }
 
         ///// <summary>
         ///// Xác nhận đơn hàng

@@ -1,4 +1,5 @@
-﻿using CMS_Lib.Data;
+﻿using CMS_Lib;
+using CMS_Lib.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,86 @@ namespace API.Models
     {
         public string GuidDoctor { get; set; }
         public string Coupon { get; set; }
+
+        public string Create(string token)
+        {
+            try
+            {
+                using (FL_DoctorEntities __context = new FL_DoctorEntities())
+                {
+                    if (__context.Users.Any(x => x.TokenLogin.Equals(token) && x.GroupUser.Code.Equals("patient")) == true && __context.Users.Any(x=>x.GUID.Equals(this.GuidDoctor) && x.GroupUser.Code.Equals("doctor")))
+                    {
+                        var patient = __context.Users.Single(x=>x.TokenLogin.Equals(token));
+                        var doctor = __context.Users.Single(x=>x.GUID.Equals(this.GuidDoctor));
+                        Coupon coupon = new Coupon();
+                        if (__context.Coupons.Any(x=>x.Code.Equals(this.Coupon)))
+                        {
+                            coupon = __context.Coupons.Single(x=>x.Code.Equals(this.Coupon));
+                        }
+                        var doctorBalance = CMS_Helper.ConvertStringToDecimal(CMS_Helper.Base64Decode(doctor.Balance));
+                        if ( doctorBalance >= doctor.Major.Price && doctorBalance >= CMS_Helper.ConvertStringToDecimal(CMS_Helper.Settings("services_fee")))
+                        {
+                            Transaction t = new Transaction();
+                            t.DateCreated = DateTime.UtcNow;
+                            var tmp = doctorBalance - (decimal)doctor.Major.Price;
+                            t.EndingBalanceReceiver = CMS_Helper.Base64Encode(tmp.ToString());
+                            doctor.Balance = t.EndingBalanceReceiver;//update balance doctor
+                            t.SenderID = patient.ID;
+                            t.ReceiverID = doctor.ID;
+                            var tmpTotal = doctor.Major.Price;
+                            t.TotalAmount = CMS_Helper.Base64Encode(tmpTotal.ToString());
+                            #region Check Coupon
+                            decimal? tmpTotalDiscount = 0;
+                            if (coupon!=null && (DateTime.Compare(DateTime.Now, (DateTime)coupon.DateStart) >= 0) && (DateTime.Compare(DateTime.Now, (DateTime)coupon.DateEnd)) <= 0 && coupon.Count > 0)
+                            {
+                                if (coupon.PercentValue != null)
+                                {
+                                    tmpTotalDiscount = tmpTotal * (decimal)coupon.PercentValue / 100;
+                                    t.TotalDiscount = CMS_Helper.Base64Encode(tmpTotalDiscount.ToString());
+                                }
+                                else
+                                {
+                                    tmpTotalDiscount = coupon.Value;
+                                    t.TotalDiscount = CMS_Helper.Base64Encode(tmpTotalDiscount.ToString());
+                                }
+                            }
+                            #endregion
+                            var tmpTotalPaid = tmpTotal - tmpTotalDiscount;
+                            t.TotalPaid = CMS_Helper.Base64Encode(tmpTotalPaid.ToString());
+                            t.TransactionTypeID = __context.TransactionTypes.Single(x=>x.Code.Equals("order")).ID;
+                            #region Transaction Status
+                            var transactionStatus = __context.TransactionStatus.Single(x => x.Code.Equals("order_create"));
+                            TransactionTransactionStatu tts = new TransactionTransactionStatu();
+                            tts.TransactionID = t.ID;
+                            tts.TransactionStatusID = transactionStatus.ID;
+                            tts.DateCreated = DateTime.UtcNow;
+                            t.TransactionTransactionStatus.Add(tts);
+                            __context.Transactions.Add(t);
+                            #endregion
+                            t.TransactionCode = CMS_Helper.createTransactionIDString(t.ID);
+                            #region Transaction Detail
+                            TransactionDetail transactionDetail = new TransactionDetail();
+                            transactionDetail.ProductName = doctor.Major.Name;
+                            transactionDetail.Quantity = 1;
+                            transactionDetail.Price = CMS_Helper.Base64Encode(doctor.Major.Price == null ? "0" : doctor.Major.Price.ToString());
+                            transactionDetail.TransactionID = t.ID;
+                            var tmp_total = doctor.Major.Price * transactionDetail.Quantity;
+                            transactionDetail.Total = CMS_Helper.Base64Encode(tmp_total.ToString()) ;
+                            t.TransactionDetails.Add(transactionDetail);
+                            #endregion
+                            __context.SaveChanges();
+                            return t.TransactionCode;
+                        }
+                        return null;
+                    }
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
     public class VM_Transaction_Respone
     {

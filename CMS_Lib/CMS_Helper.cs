@@ -258,6 +258,20 @@ namespace CMS_Lib
         }
         #endregion
 
+        public static decimal ConvertStringToDecimal(string number)
+        {
+            try
+            {
+                decimal n = 0;
+                decimal.TryParse(number, out n);
+                return n;
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
+
         public static string Settings(string key)
         {
             try
